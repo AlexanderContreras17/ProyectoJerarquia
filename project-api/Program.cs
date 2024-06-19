@@ -10,9 +10,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ItesrcneActividadesContext>(options =>
+builder.Services.AddDbContext<LabsysteDoubledContext>(options =>
 {
-    options.UseMySql("server=204.93.216.11;database=itesrcne_actividades;user=itesrcne_deptos;password=sistemaregistrotec24", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.3.29-mariadb"));
+    options.UseMySql("server=labsystec.net;database=labsyste_doubled;user=labsyste_doubled;password=xs~o714N5", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.3.29-mariadb"));
 });
 builder.Services.AddTransient<ActividadesRepository>();
 builder.Services.AddTransient<DepartamentosRepository>();

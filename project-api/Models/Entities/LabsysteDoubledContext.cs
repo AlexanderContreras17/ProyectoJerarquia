@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace project_api.Models.Entities;
 
-public partial class ItesrcneActividadesContext : DbContext
+public partial class LabsysteDoubledContext : DbContext
 {
-    public ItesrcneActividadesContext()
+    public LabsysteDoubledContext()
     {
     }
 
-    public ItesrcneActividadesContext(DbContextOptions<ItesrcneActividadesContext> options)
+    public LabsysteDoubledContext(DbContextOptions<LabsysteDoubledContext> options)
         : base(options)
     {
     }
@@ -19,19 +20,24 @@ public partial class ItesrcneActividadesContext : DbContext
 
     public virtual DbSet<Departamentos> Departamentos { get; set; }
 
-    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseMySql("server=labsystec.net;database=labsyste_doubled;user=labsyste_doubled;password=xs~o714N5", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.7-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .UseCollation("utf8_general_ci")
-            .HasCharSet("utf8");
+            .UseCollation("latin1_general_ci")
+            .HasCharSet("latin1");
 
         modelBuilder.Entity<Actividades>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("actividades");
+            entity
+                .ToTable("actividades")
+                .HasCharSet("utf8mb3")
+                .UseCollation("utf8mb3_general_ci");
 
             entity.HasIndex(e => e.IdDepartamento, "id_departamento");
 
@@ -71,7 +77,10 @@ public partial class ItesrcneActividadesContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("departamentos");
+            entity
+                .ToTable("departamentos")
+                .HasCharSet("utf8mb3")
+                .UseCollation("utf8mb3_general_ci");
 
             entity.HasIndex(e => e.IdSuperior, "id_superior");
 

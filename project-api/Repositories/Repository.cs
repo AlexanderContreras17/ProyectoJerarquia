@@ -4,12 +4,12 @@ namespace project_api.Repositories
 {
     public class Repository<T> where T : class
     {
-        public Repository(ItesrcneActividadesContext ctx)
+        public Repository(LabsysteDoubledContext ctx)
         {
                 Ctx=ctx;
         }
 
-        public ItesrcneActividadesContext Ctx { get; }
+        public LabsysteDoubledContext Ctx { get; }
 
         public virtual IEnumerable<T> GetAll()
         {
