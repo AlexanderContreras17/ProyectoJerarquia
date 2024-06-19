@@ -153,11 +153,6 @@ public class ActividadesController(ActividadesRepository repository, ActividadVa
                     var bytes = Convert.FromBase64String(dto.Imagen);
                     System.IO.File.WriteAllBytes(path, bytes);
                     return Ok();
-
-                    // call a method in other image controller
-
-
-
                 }
                 return BadRequest(results.Errors.Select(x => x.ErrorMessage));
             }

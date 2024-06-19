@@ -18,7 +18,7 @@ public class LoginController(DepartamentosRepository departamentosRepository, IC
     [HttpPost]
     public IActionResult Login(LoginDto login)
     {
-        if (login.UserName.Contains("equipo3"))
+        if (login.UserName.Contains("equipo6"))
         {
 
             var departemento = departamentosRepository.Get(login.UserName);
@@ -29,7 +29,7 @@ public class LoginController(DepartamentosRepository departamentosRepository, IC
 
             if (!success) return BadRequest("Credenciales incorrectas");
         
-            string role = departemento.Nombre == "Dirección General - Equipo 3" ? "Admin" : "Usuario";
+            string role = departemento.Nombre == "Dirección General - Equipo 6" ? "Admin" : "Usuario";
 
             var jwttoken = new JwtTokenGenerator(configuration);
 
