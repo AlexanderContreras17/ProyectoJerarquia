@@ -6,7 +6,6 @@ using project_client.Models;
 
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
@@ -38,13 +37,9 @@ public class HomeController(HttpClient httpClient) : Controller
     [HttpPost("/home/iniciar-sesion")]
     public async Task<IActionResult> Login(LoginViewModel viewModel)
     {
-		//client.BaseAddress = new Uri("https://sga.api.labsystec.net/");
-		//client = new HttpClient { BaseAddress = x };
-		Uri baseAddress = new Uri("http://localhost:5000/");
+        client.BaseAddress = new Uri("http://ApiJerarquica.labsystec.net");
 
-
-
-		var json = JsonSerializer.Serialize(viewModel);
+        var json = JsonSerializer.Serialize(viewModel);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         var response = await client.PostAsync("/api/login", content);
