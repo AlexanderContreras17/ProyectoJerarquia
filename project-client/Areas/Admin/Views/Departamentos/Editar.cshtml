@@ -13,12 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/styles/normalize.css">
     <link rel="stylesheet" href="~/styles/main.css">
-    <title>Agregar departamento - Sistema Gestor de Actividades</title>
+    <title>Agregar departamento - Sistema de Actividades</title>
 </head>
 
 <body>
 
     <header class="header">
+        <div class="header-title">Sistema de actividades</div>
         <div class="search">
             <form action="/buscar" method="post" class="search-form">
                 <!--Hacer esto con JS -->
@@ -28,49 +29,48 @@
                 </svg>
             </form>
         </div>
-        <div class="header-profile">
-            <span class="header-profile-name">
-                @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value
-                <span class="small-text">
-                    @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+        <nav class="nav">
+            <a href="/admin/" class="nav-link">Inicio</a>
+            <a href="/admin/home/borradores" class="nav-link">Borradores</a>
+            <a href="/admin/departamentos" class="nav-link">Departamentos</a>
+            <div class="header-profile">
+                <span class="header-profile-name">
+                    @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value
+                    <span class="small-text">
+                        @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+                    </span>
                 </span>
-            </span>
-            <svg class="header-profile-expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
-                <path d="M480-360 280-560h400L480-360Z" />
-            </svg>
-            <div class="profile-menu">
-                <a href="/admin/">Inicio</a>
-                <a href="/admin/home/borradores">Borradores</a>
-                <a href="/admin/departamentos">Departamentos</a>
-                <a href="/cerrar-sesion">Cerrar sesión</a>
+                <svg class="header-profile-expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
+                    <path d="M480-360 280-560h400L480-360Z" />
+                </svg>
+                <div class="profile-menu">
+                    <a href="/cerrar-sesion">Cerrar sesión</a>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
+
 
     <main class="main">
 
-        <svg class="up-button" id="up-button" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-            <path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z" />
-        </svg>
+        <form class="actividad-form-2" method="post" action="~/admin/departamentos/editar" enctype="multipart/form-data">
 
-        <form class="actividad-form" method="post" action="~/admin/departamentos/editar" enctype="multipart/form-data">
+            <div class="actividad-form-content-2">
 
-            <div class="actividad-form-content">
-
-                <div class="actividad-left">
+                <div class="actividad-left-2">
                     <input type="hidden" name="id" asp-for=Id id="id">
 
                     <label class="actividad-form-label" for="Nombre">Nombre</label>
                     <input class="actividad-form-input" type="text" asp-for="Nombre" required>
 
-                     <label class="actividad-form-label" for="IdDepartamentoSuperior">Cambiar departamento superior</label>
+                    <label class="actividad-form-label" for="IdDepartamentoSuperior">Cambiar departamento superior</label>
                     <select class="actividad-form-input" asp-for="IdSuperior" required>
-                    <option value="0">Ningúno</option>
-                    @foreach (var departamento in Model.Departamentos)
-                    {
-                    <option value="@departamento.Id">@departamento.Nombre</option>
-                    }
-                    </select> 
+                        <option value="0">Ningúno</option>
+                        @foreach (var departamento in Model.Departamentos)
+                        {
+                            <option value="@departamento.Id">@departamento.Nombre</option>
+                        }
+                    </select>
 
                 </div>
 
@@ -111,9 +111,6 @@
         </form>
 
     </main>
-    <footer class="footer">
-        <p>Lorem Ipsum Industries &copy; 2024</p>
-    </footer>
 
     <script src="~/scripts/main.js"></script>
 </body>

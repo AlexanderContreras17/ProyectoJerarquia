@@ -21,12 +21,13 @@
             selector: '#mytextarea'
         });
     </script>
-    <title>Agregar actividad - Sistema Gestor de Actividades</title>
+    <title>Agregar actividad - Sistema de Actividades</title>
 </head>
 
 <body>
 
     <header class="header">
+        <div class="header-title">Sistema de actividades</div>
         <div class="search">
             <form action="/buscar" method="post" class="search-form">
                 <!--Hacer esto con JS -->
@@ -36,30 +37,28 @@
                 </svg>
             </form>
         </div>
-        <div class="header-profile">
-            <span class="header-profile-name">
-                @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value
-                <span class="small-text">
-                    @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+        <nav class="nav">
+            <a href="/usuario/" class="nav-link">Inicio</a>
+            <a href="/usuario/home/borradores" class="nav-link">Borradores</a>
+
+            <div class="header-profile">
+                <span class="header-profile-name">
+                    @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value
+                    <span class="small-text">
+                        @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+                    </span>
                 </span>
-            </span>
-            <svg class="header-profile-expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
-                <path d="M480-360 280-560h400L480-360Z" />
-            </svg>
-            <div class="profile-menu">
-                <a href="/usuario/">Inicio</a>
-                <a href="/usuario/home/borradores">Borradores</a>
-                
-                <a href="/cerrar-sesion">Cerrar sesión</a>
+                <svg class="header-profile-expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
+                    <path d="M480-360 280-560h400L480-360Z" />
+                </svg>
+                <div class="profile-menu">
+                    <a href="/cerrar-sesion">Cerrar sesión</a>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
 
     <main class="main">
-
-        <svg class="up-button" id="up-button" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-            <path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z" />
-        </svg>
 
         <form class="actividad-form" method="post" action="~/usuario/home/editar" enctype="multipart/form-data">
 
@@ -76,10 +75,6 @@
 
                     <label class="actividad-form-label" for="fechaRealizacion">Fecha de realizacion</label>
                     <label class="actividad-form-input" asp-for="Actividad.FechaRealizacion">@Model.Actividad.FechaRealizacion.Value.ToString("dd/MM/yyyy")</label>
-
-                </div>
-
-                <div class="actividad-right">
                     <label class="actividad-form-label" for="imagen" style="text-align: center;">Imagen</label>
                     <input class="actividad-form-input" style="display: none;" type="file"
                            accept="image/*" asp-for="Actividad.Archivo">
@@ -88,18 +83,20 @@
                         <img src="https://sga.api.labsystec.net/images/@(Model.Actividad.Id).png" asp-append-version height="100%" alt="imagen" class="actividad-form-img">
                     </div>
 
+                    <label class="actividad-form-label" for="descripcion">Descripción</label>
+                    <textarea id="mytextarea" class="actividad-form-input" asp-for="Actividad.Descripcion"></textarea>
+
+                    <br />
+
+                    @Html.ValidationSummary(true)
+
+                    <div class="actividad-form-buttons">
+                        <a href="~/usuario/" class="actividad-form-submit cancel">Cancelar</a>
+                        <input type="submit" class="actividad-form-submit" value="Editar actividad">
+                    </div>
                 </div>
-            </div>
-            <label class="actividad-form-label" for="descripcion">Descripción</label>
-            <textarea id="mytextarea" class="actividad-form-input" asp-for="Actividad.Descripcion"></textarea>
 
-            <br />
 
-            @Html.ValidationSummary(true)
-
-            <div class="actividad-form-buttons">
-                <a href="~/usuario/" class="actividad-form-submit cancel">Cancelar</a>
-                <input type="submit" class="actividad-form-submit" value="Editar actividad">
             </div>
 
             <script>
@@ -127,9 +124,6 @@
         </style>
 
     </main>
-    <footer class="footer">
-        <p>Lorem Ipsum Industries &copy; 2024</p>
-    </footer>
 
     <script src="~/scripts/main.js"></script>
 </body>

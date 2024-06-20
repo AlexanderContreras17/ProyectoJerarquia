@@ -14,13 +14,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/normalize.css">
-    <link rel="stylesheet" href="/styles/main.css">
-    <title>Inicio - Sistema Gestor de Actividades</title>
+    <link rel="stylesheet" href="~/styles/main.css">
+    <title>Inicio - Sistema de Actividades</title>
 </head>
 
 <body>
 
     <header class="header">
+        <div class="header-title">Sistema de actividades</div>
         <div class="search">
             <form action="/buscar" method="post" class="search-form">
                 <!--Hacer esto con JS -->
@@ -30,23 +31,25 @@
                 </svg>
             </form>
         </div>
-        <div class="header-profile">
-            <span class="header-profile-name">
-                @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value
-                <span class="small-text">
-                    @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+        <nav class="nav">
+            <a href="/usuario/" class="nav-link">Inicio</a>
+            <a href="/usuario/home/borradores" class="nav-link">Borradores</a>
+
+            <div class="header-profile">
+                <span class="header-profile-name">
+                    @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value
+                    <span class="small-text">
+                        @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+                    </span>
                 </span>
-            </span>
-            <svg class="header-profile-expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
-                <path d="M480-360 280-560h400L480-360Z" />
-            </svg>
-            <div class="profile-menu">
-                <a href="/usuario/">Inicio</a>
-                <a href="/usuario/home/borradores">Borradores</a>
-                
-                <a href="/cerrar-sesion">Cerrar sesión</a>
+                <svg class="header-profile-expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
+                    <path d="M480-360 280-560h400L480-360Z" />
+                </svg>
+                <div class="profile-menu">
+                    <a href="/cerrar-sesion">Cerrar sesión</a>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
 
     <main class="main">
@@ -54,7 +57,7 @@
         <div class="buttons">
 
             <div class="capturar" id="btnCapturar">
-                <a href="~/Usuario/Home/Agregar" class="capturar-text">Capturar</a>
+                <a href="~/Usuario/home/agregar" class="capturar-text">Agregar</a>
             </div>
 
             <div class="filtros" id="aside-open" onclick="showFilters()">
@@ -63,36 +66,47 @@
 
         </div>
 
-        <svg onclick="GoTopPage()" class="up-button" id="up-button" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-            <path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z" />
-        </svg>
 
         <div class="actividades">
-            <p class="actividades-title">Actividades</p>
+            <p class="section-title">Hoy</p>
             <div class="actividades-box">
                 <div id="userIdDepartamento" hidden data-user-id="@userIdDepartamento"></div>
                 <div id="role" hidden data-user-role="@role"></div>
 
-                @foreach (var actividad in Model.Actividades)
-                {
-                    if (actividad.Estado == 1)
-                    {
-                        <div class="actividad" data-id="@actividad.Id" onclick="showActividadDetails(@actividad.Id)">
-                            <div class="actividad-header">
-                                <span class="actividad-title">
-                                    @actividad.Titulo <span class="actividad-title-depto">
-                                        @actividad.Departamento
-                                    </span>
-                                </span>
-                                <span class="actividad-fecha">@actividad.FechaCreacion.ToString("dd/MM/yyyy")</span>
-                            </div>
-                            <p class="actividad-description">
-                                @Html.Raw(actividad.Descripcion)
-                            </p>
-                        </div>
-                    }
-                }
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Departamento</th>
+                            <th>Fecha de Creación</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var actividad in Model.Actividades)
+                        {
+                            if (actividad.Estado == 1)
+
+                            {
+                                <tr class="actividad" data-id="@actividad.Id" onclick="showActividadDetails()">
+                                    <td><span class="actividad-title">@actividad.Titulo</span></td>
+                                    <td><span class="actividad-title-depto">@actividad.Departamento</span></td>
+                                    <td><span class="actividad-fecha">@actividad.FechaCreacion.ToString("dd/MM/yyyy")</span></td>
+                                    <td><p class="actividad-description">@Html.Raw(actividad.Descripcion)</p></td>
+                                </tr>
+                                <tr class="actividad" data-id="@actividad.Id" onclick="showActividadDetails()">
+                                    <td><span class="actividad-title">@actividad.Titulo</span></td>
+                                    <td><span class="actividad-title-depto">@actividad.Departamento</span></td>
+                                    <td><span class="actividad-fecha">@actividad.FechaCreacion.ToString("dd/MM/yyyy")</span></td>
+                                    <td><p class="actividad-description">@Html.Raw(actividad.Descripcion)</p></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
             </div>
+        </div>
+
     </main>
 
     <aside class="aside" id="aside">
@@ -157,14 +171,12 @@
 
         <div class="details-btns">
             <a href="javascript:" class="details-delete">Eliminar</a>
-            <a href="javascript:" class="details-modify">Modificar</a>
+            <a href="javascript:" class="details-modify">Editar</a>
         </div>
 
     </div>
 
-    <footer class="footer">
-        <p>Lorem Ipsum Industries &copy; 2024</p>
-    </footer>
+
 
     <script>
         async function showActividadDetails(id) {
@@ -192,7 +204,6 @@
 
             // Obtener el valor del atributo data-user-id
             let userIdDepartamento = userIdDepartamentoDiv.getAttribute('data-user-id');
-
             let descripcion = response.descripcion;
             let departamento = response.departamento;
             let estado = response.estado;
@@ -213,17 +224,17 @@
             let detailsTitle = document.querySelector('.details-title');
 
             let template = `
-                                ${titulo} <br>
-                                        <a class="details-dpto" href="javascript:">
-                                            ${departamento}
-                                        </a> <br>
-                                        <span class="details-date details-date-create">Creado el ${fechaCreacion}</span>
-                                        <span class="details-date">
-                                            &middot; Ultima
-                                            actualizacion el ${fechaActualizacion}
-                                        </span>
-                                        <span class="details-date"> &middot; Realizado el ${fechaRealizacion}</span>
-                                `;
+                                                ${titulo} <br>
+                                                        <a class="details-dpto" href="javascript:">
+                                                            ${departamento}
+                                                        </a> <br>
+                                                        <span class="details-date details-date-create">Creado el ${fechaCreacion}</span>
+                                                        <span class="details-date">
+                                                            &middot; Ultima
+                                                            actualizacion el ${fechaActualizacion}
+                                                        </span>
+                                                        <span class="details-date"> &middot; Realizado el ${fechaRealizacion}</span>
+                                                `;
             let image = document.querySelector('.details-img');
 
             image.src = `https://sga.api.labsystec.net/images/${id}.png`;

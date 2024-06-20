@@ -14,13 +14,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/normalize.css">
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="~/styles/main.css">
     <title>Departamentos - Sistema Gestor de Actividades</title>
 </head>
 
 <body>
 
+
     <header class="header">
+        <div class="header-title">Sistema de actividades</div>
         <div class="search">
             <form action="/buscar" method="post" class="search-form">
                 <!--Hacer esto con JS -->
@@ -30,23 +32,25 @@
                 </svg>
             </form>
         </div>
-        <div class="header-profile">
-            <span class="header-profile-name">
-                @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value
-                <span class="small-text">
-                    @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+        <nav class="nav">
+            <a href="/admin/" class="nav-link">Inicio</a>
+            <a href="/admin/home/borradores" class="nav-link">Borradores</a>
+            <a href="/admin/departamentos" class="nav-link">Departamentos</a>
+            <div class="header-profile">
+                <span class="header-profile-name">
+                    @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value
+                    <span class="small-text">
+                        @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+                    </span>
                 </span>
-            </span>
-            <svg class="header-profile-expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
-                <path d="M480-360 280-560h400L480-360Z" />
-            </svg>
-            <div class="profile-menu">
-                <a href="/admin/">Inicio</a>
-                <a href="/admin/home/borradores">Borradores</a>
-                <a href="/admin/departamentos">Departamentos</a>
-                <a href="/cerrar-sesion">Cerrar sesión</a>
+                <svg class="header-profile-expand" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px">
+                    <path d="M480-360 280-560h400L480-360Z" />
+                </svg>
+                <div class="profile-menu">
+                    <a href="/cerrar-sesion">Cerrar sesión</a>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
 
     <main class="main">
@@ -54,40 +58,45 @@
         <div class="buttons">
 
             <div class="capturar" id="btnCapturar">
-                <a href="~/admin/departamentos/agregar" class="capturar-text">Capturar</a>
+                <a href="~/admin/departamentos/agregar" class="capturar-text">Agregar</a>
             </div>
 
         </div>
 
-        <svg class="up-button" id="up-button" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-            <path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z" />
-        </svg>
 
         <div class="actividades">
             <p class="actividades-title">Departamentos</p>
+            <table class="actividades-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Departamento Superior</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var departamento in Model.Departamentos)
+                    {
+                        <tr data-id="@departamento.Id">
+                            <td>@departamento.Nombre</td>
+                            <td>@departamento.Username</td>
+                            <td>
+                                @if (departamento.DepartamentoSuperior != null)
+                                {
+                                    @departamento.DepartamentoSuperior
+                                }
+                            </td>
+                            <td class="acciones">
 
-            <div class="actividades-box">
-                @foreach (var departamento in Model.Departamentos)
-                {
-                    <div class="actividad dpto" data-id="@departamento.Id">
-                        <div class="actividad-header">
-                            <span class="actividad-title">
-                                @departamento.Nombre <span class="actividad-title-depto">
-                                    @departamento.Username
-                                </span>
-                            </span>
-                        </div>
-                        @if (departamento.DepartamentoSuperior != null)
-                        {
-                            <p class="actividad-description">
-                                @departamento.DepartamentoSuperior
-                            </p>
-                        }
-                        <a href="~/admin/departamentos/editar/@(departamento.Id)" class="details-dpto dpto-btn">Modificar</a>
-                        <a onclick="ConfirmElimiarDepartamento(@(departamento.Id))" class="details-dpto dpto-btn">Eliminar</a>
-                    </div>
-                }
-            </div>
+                                <a href="~/admin/departamentos/editar/@(departamento.Id)" class="details-dpto dpto-btn">Editar</a>
+                                <a href="#" onclick="ConfirmElimiarDepartamento()" class="details-dpto dpto-btn">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </main>
 
     <div class="confirm-delete-departamento">
@@ -100,9 +109,7 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <p>Lorem Ipsum Industries &copy; 2024</p>
-    </footer>
+
 
     <script>
         function ConfirmElimiarDepartamento(id) {

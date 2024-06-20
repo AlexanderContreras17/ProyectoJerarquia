@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/styles/normalize.css">
     <link rel="stylesheet" href="~/styles/main.css">
-    <script src="https://cdn.tiny.cloud/1/r9ntmf320hcycx0ci473rmxopso22j6woj4ikx9nq5kbaq84/tinymce/7/tinymce.min.js"referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/r9ntmf320hcycx0ci473rmxopso22j6woj4ikx9nq5kbaq84/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: '#mytextarea'
@@ -21,6 +21,7 @@
 
 <body>
     <header class="header">
+        <div class="header-title">Sistema de actividades</div>
         <div class="search">
             <form action="~/search" method="post" class="search-form">
                 <input type="search" placeholder="Buscar..." name="search" id="search" class="search-input">
@@ -31,7 +32,7 @@
         </div>
         <div class="header-profile">
             <span class="header-profile-name">
-                Adriana Ramírez Hernández
+                Hector Javier Padilla Lara
                 <span class="small-text">
                     Depto. Ingeniería en Sistemas Computacionales
                 </span>
@@ -46,9 +47,6 @@
     </header>
     <main class="main">
 
-        <svg class="up-button" id="up-button" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-            <path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z" />
-        </svg>
 
         <form class="actividad-form" method="post" action="agregarActividad">
 
@@ -73,9 +71,6 @@
                     <label class="actividad-form-label" for="fechaRealizacion">Fecha de realizacion</label>
                     <input class="actividad-form-input" type="date" name="fechaRealizacion" id="fechaRealizacion">
 
-                </div>
-
-                <div class="actividad-right">
                     <label class="actividad-form-label" for="imagen" style="text-align: center;">Imagen</label>
                     <input class="actividad-form-input" style="display: none;" type="file" name="imagen" id="imagen"
                            accept="image/*" required>
@@ -85,6 +80,7 @@
                     </div>
 
                 </div>
+
             </div>
             <label class="actividad-form-label" for="descripcion">Descripción</label>
             <textarea id="mytextarea" class="actividad-form-input" name="descripcion" required></textarea>
@@ -123,10 +119,6 @@
         </style>
 
     </main>
-
-    <footer class="footer">
-        <p>Lorem Ipsum Industries</p>
-    </footer>
 
     <script src="~/scripts/main.js"></script>
 </body>
