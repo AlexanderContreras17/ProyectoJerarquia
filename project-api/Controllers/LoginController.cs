@@ -29,7 +29,7 @@ public class LoginController(DepartamentosRepository departamentosRepository, IC
 
             if (!success) return BadRequest("Credenciales incorrectas");
         
-            string role = departemento.Nombre == "Dirección General - equipo 6" ? "Admin" : "Usuario";
+            string role = (departemento.Nombre == "Dirección General - equipo 6") ? "Admin" : "Usuario";
 
             var jwttoken = new JwtTokenGenerator(configuration);
 

@@ -5,6 +5,7 @@ namespace project_api.Helpers
 {
     public class Encrypter
     {
+        
         public static string HashPassword(string password)
         {
             using (SHA512 shaM = SHA512.Create())
