@@ -157,7 +157,7 @@
             <span class="details-date"> &middot; Realizado el 03/01/2002</span>
         </p>
         <div class="details-body">
-            <img src="https://sga.api.labsystec.net/images/0.png" asp-append-version alt="evento" class="details-img">
+            <img src="https://apijerarquica.labsystec.net/images/0.png" asp-append-version alt="evento" class="details-img">
             <p class="details-body-description">Hello, World!</p>
         </div>
 
@@ -174,7 +174,7 @@
 
             actividadDetails.style.animationName = "open-details";
 
-            let url = `https://sga.api.labsystec.net/api/actividad/${id}`;
+            let url = `https://apijerarquica.labsystec.net/api/actividad/${id}`;
 
             let request = await fetch(url, {
                 method: 'GET',
@@ -227,10 +227,10 @@
                                                 `;
             let image = document.querySelector('.details-img');
 
-            image.src = `https://sga.api.labsystec.net/images/${id}.png`;
+            image.src = `https://apijerarquica.labsystec.net/images/${id}.png`;
 
             image.onerror = function () {
-                image.src = `https://sga.api.labsystec.net/images/0.png`;
+                image.src = `https://apijerarquica.labsystec.net/images/0.png`;
             }
 
             let btnModificar = document.querySelector('.details-modify');

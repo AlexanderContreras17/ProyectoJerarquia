@@ -110,8 +110,6 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHostEn
 
             var converter = new ConverterToBase64(webHostEnvironment);
 
-            // Suponiendo que tienes una propiedad 'Imagen' en tu ViewModel que contiene la imagen como un byte array
-            // Aquí debes reemplazar 'vm.Imagen' con la propiedad real que contiene la imagen en tu ViewModel
             var imagenBase64 = "";
             if (vm.Archivo != null)
             {
