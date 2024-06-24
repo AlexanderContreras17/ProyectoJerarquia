@@ -33,7 +33,7 @@ actividades.forEach((actividad) => {
 
         let id = actividad.getAttribute('data-id');
 
-        let url = `https://sga.api.labsystec.net/api/actividad/${id}`;
+        let url = `https://apijerarquica.labsystec.net/api/actividad/${id}`;
 
         let request = await fetch(url, {
             method: 'GET',
@@ -81,10 +81,10 @@ actividades.forEach((actividad) => {
         `;
         let image = document.querySelector('.details-img');
 
-        image.src = `https://sga.api.labsystec.net/images/${id}.png`;
+        image.src = `https://apijerarquica.labsystec.net/images/${id}.png`;
 
         image.onerror = function() {
-            image.src = `https://sga.api.labsystec.net/images/0.png`;
+            image.src = `https://apijerarquica.labsystec.net/images/0.png`;
         }
 
         let btnModificar = document.querySelector('.details-modify');

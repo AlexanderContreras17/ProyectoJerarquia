@@ -18,7 +18,7 @@ public class DepartamentosController : Controller
     public async Task<IActionResult> IndexAsync()
     {
         var viewModel = new DepartamentosViewModel();
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -45,7 +45,7 @@ public class DepartamentosController : Controller
     {
         var viewModel = new AgregarDepartamentoViewModel();
 
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -78,7 +78,7 @@ public class DepartamentosController : Controller
     public async Task<IActionResult> Agregar(AgregarDepartamentoViewModel viewModel)
     {
         var userid = User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -150,7 +150,7 @@ public class DepartamentosController : Controller
     {
         var viewModel = new EditarDepartamentoViewModel();
 
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -193,7 +193,7 @@ public class DepartamentosController : Controller
     {
         var userid = int.Parse(User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value);
 
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -253,7 +253,7 @@ public class DepartamentosController : Controller
     [HttpGet("/admin/departamentos/eliminar/{id}")]
     public async Task<IActionResult> EliminarAsync(int id)
     {
-         httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+         httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

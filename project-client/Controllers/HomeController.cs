@@ -37,7 +37,7 @@ public class HomeController(HttpClient httpClient) : Controller
     [HttpPost("/home/iniciar-sesion")]
     public async Task<IActionResult> Login(LoginViewModel viewModel)
     {
-        client.BaseAddress = new Uri("http://ApiJerarquica.labsystec.net");
+        client.BaseAddress = new Uri("https://ApiJerarquica.labsystec.net");
 
         var json = JsonSerializer.Serialize(viewModel);
         var content = new StringContent(json, Encoding.UTF8, "application/json");

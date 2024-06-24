@@ -23,7 +23,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHost) 
     [HttpGet]
     public async Task<IActionResult> Index([FromQuery] string? departamento, [FromQuery] DateTime? fechaInicio, [FromQuery] DateTime? fechaFin)
     {
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -66,7 +66,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHost) 
     [HttpGet]
     public async Task<IActionResult> Borradores([FromQuery] string? departamento, [FromQuery] DateTime? fechaInicio, [FromQuery] DateTime? fechaFin)
     {
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -106,7 +106,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHost) 
     {
         var actividadViewModel = new AgregarActividadViewModel();
         
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -131,7 +131,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHost) 
     [HttpPost]
     public async Task<IActionResult> AgregarAsync(AgregarActividadViewModel vm)
     {
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -206,7 +206,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHost) 
     [HttpPost]
     public async Task<IActionResult> Borrador(AgregarActividadViewModel vmW)
     {
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -280,7 +280,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHost) 
     public async Task<IActionResult> Editar(int id)
     {
         GetActividadViewModel act = new();
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -302,7 +302,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHost) 
     [HttpPost]
     public async Task<IActionResult> Editar(GetActividadViewModel act)
     {
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -367,7 +367,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHost) 
     [HttpGet("admin/home/eliminar/{id}")]
     public async Task<IActionResult> Eliminar(int id)
     {
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

@@ -16,7 +16,7 @@ public class DepartamentosController : Controller
     public async Task<IActionResult> IndexAsync()
     {
         DepartamentosViewModel vm = new DepartamentosViewModel();
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -44,7 +44,7 @@ public class DepartamentosController : Controller
     {
         var viewModel = new AgregarDepartamentoViewModel();
 
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -61,7 +61,7 @@ public class DepartamentosController : Controller
     [HttpPost]
     public async Task<IActionResult> Agregar(AgregarDepartamentoViewModel viewModel)
     {
-        httpClient.BaseAddress = new Uri("https://sga.api.labsystec.net/");
+        httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
         var token = User.Claims.First(x => x.Type == ClaimTypes.UserData).Value;
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
