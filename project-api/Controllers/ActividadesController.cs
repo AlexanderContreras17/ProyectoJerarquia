@@ -72,7 +72,7 @@ public class ActividadesController(ActividadesRepository repository, ActividadVa
         var actividad = new Actividades()
         {
             Id = 0,
-            Estado = 0,
+            Estado = 0, 
             Titulo = dto.Titulo,
             FechaCreacion = dto.FechaCreacion.Value,
             FechaActualizacion = dto.FechaActualizacion.Value,

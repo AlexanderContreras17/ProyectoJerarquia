@@ -15,9 +15,9 @@ public partial class Actividades
 
     public int IdDepartamento { get; set; }
 
-    public DateTime FechaCreacion { get; set; }
+    public DateTime? FechaCreacion { get; set; }
 
-    public DateTime FechaActualizacion { get; set; }
+    public DateTime? FechaActualizacion { get; set; }
 
     public int Estado { get; set; }
 

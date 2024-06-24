@@ -244,7 +244,12 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHostEn
             if (r.IsSuccessStatusCode)
             {
                 var con = await r.Content.ReadAsStringAsync();
-                act.Actividad = JsonConvert.DeserializeObject<Actividad>(con); ;
+                Console.WriteLine(con); // Verificar el contenido del JSON recibido
+
+                // Si con es un JSON array, debes deserializarlo como una lista o array
+                var actividades = JsonConvert.DeserializeObject<List<Actividad>>(con);
+
+                act.Actividad = JsonConvert.DeserializeObject<Actividad>(con);
 
                 return View(act);
             }
@@ -279,7 +284,7 @@ public class HomeController(HttpClient httpClient, IWebHostEnvironment webHostEn
 
 
     [HttpGet]
-    public async Task<IActionResult> Borradores([FromQuery] string? departamento, [FromQuery] DateTime? fechaInicio, [FromQuery] DateTime? fechaFin)
+    public async Task<IActionResult> Borradores([FromQuery] string? departamento, [FromQuery] DateTime? fechaInicio, [FromQuery] DateTime?fechafin)
     {
         httpClient.BaseAddress = new Uri("https://apijerarquica.labsystec.net");
 
